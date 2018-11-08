@@ -1,0 +1,29 @@
+{
+  "name": "testNode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tolstar36/testNode.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tolstar36/testNode/issues"
+  },
+  "homepage": "https://github.com/tolstar36/testNode#readme",
+  "dependencies": {
+    "joi": "^14.0.4",
+    "koa": "^2.6.1",
+    "koa-body": "^4.0.4",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.3.10"
+  }
+}
