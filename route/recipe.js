@@ -12,6 +12,9 @@ const validation = ({ create = false }) => async(ctx, next) => {
   });
   const { error, value } = Joi.validate(ctx.request.body, schema);
   if (!error) {
+    if(value.categoryId) {
+      await Category.getCategoryById(value.categoryId); // check the presence of such a category
+    }
     ctx.validBody = value; // added field "validBody" which contains the only necessary fields for this essence(Recipe)
     await next();
   } else {
@@ -29,7 +32,6 @@ router.get('/', async(ctx) => {
 });
 
 router.post('/', validation({ create: true }), async(ctx) => {
-  await Category.getCategoryById(ctx.validBody.categoryId); // check the presence of such a category
   ctx.body = await Recipe.createRecipe(ctx.validBody);
 });
 
