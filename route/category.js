@@ -1,23 +1,7 @@
 const Router = require('koa-router');
-const Joi = require('joi');
 
 const Category = require('../actions/Category');
-
-const validation = ({ create = false }) => async(ctx, next) => {
-  const schema = Joi.object().keys({
-    name: create ? Joi.string().min(3).max(30).required() : Joi.string().min(3).max(30),
-    description: Joi.string().min(3).max(256),
-    parentId: Joi.string(),
-  });
-  const { error, value } = Joi.validate(ctx.request.body, schema);
-  if (!error) {
-    ctx.validBody = value; // added field "validBody" which contains the only necessary fields for this essence(Category)
-    await next();
-  } else {
-    ctx.throw(400, error.message);
-  }
-};
-
+const validation = require('../validation/category');
 
 const router = new Router({
   prefix: '/api/v1/category',

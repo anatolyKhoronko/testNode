@@ -3,25 +3,7 @@ const Joi = require('joi');
 
 const Article = require('../actions/Article');
 const Category = require('../actions/Category');
-
-const validation = ({ create = false }) => async(ctx, next) => {
-  const schema = Joi.object().keys({
-    name: create ? Joi.string().min(3).max(60).required() : Joi.string().min(3).max(60),
-    description: Joi.string().min(3).max(1024),
-    categoryId: create ? Joi.string().required() : Joi.string(),
-  });
-  const { error, value } = Joi.validate(ctx.request.body, schema);
-  if (!error) {
-    if(value.categoryId) {
-      await Category.getCategoryById(value.categoryId); // check the presence of such a category
-    }
-    ctx.validBody = value; // added field "validBody" which contains the only necessary fields for this essence(Article)
-    await next();
-  } else {
-    ctx.throw(400, error.message);
-  }
-};
-
+const validation = require('../validation/article');
 
 const router = new Router({
   prefix: '/api/v1/article',
