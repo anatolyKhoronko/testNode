@@ -28,27 +28,27 @@ const router = new Router({
 });
 
 router.get('/', async(ctx) => {
-  ctx.body = await Recipe.getAllRecipes();
+  ctx.body = await Recipe.getAllItems();
 });
 
 router.post('/', validation({ create: true }), async(ctx) => {
-  ctx.body = await Recipe.createRecipe(ctx.validBody);
+  ctx.body = await Recipe.createItem(ctx.validBody);
 });
 
 router.get('/:id', async(ctx) => {
-  ctx.body = await Recipe.getRecipeById(ctx.params.id);
+  ctx.body = await Recipe.getItemById(ctx.params.id);
 });
 
 router.get('/:categoryId', async(ctx) => {
-  ctx.body = await Recipe.getRecipesByCategoryId(ctx.params.categoryId);
+  ctx.body = await Recipe.getItemsByCategoryId(ctx.params.categoryId);
 });
 
 router.put('/:id', validation({}), async(ctx) => {
-  ctx.body = await Recipe.updateRecipe(ctx.params.id, ctx.validBody);
+  ctx.body = await Recipe.updateItem(ctx.params.id, ctx.validBody);
 });
 
 router.del('/:id', async(ctx)  => {
-  ctx.body = await Recipe.deleteRecipe(ctx.params.id);
+  ctx.body = await Recipe.deleteItem(ctx.params.id);
 });
 
 module.exports = router;
