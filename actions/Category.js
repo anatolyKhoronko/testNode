@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { pick } = require('lodash');
 const CategoryModel = require('../db/models/category');
 const Recipe = require('./Recipe');
+const Article = require('./Article');
 
 class Category {
   async getCategories() {
@@ -43,7 +44,8 @@ class Category {
   async deleteCategory(id) {
     const category = await this.getCategoryById(id);
     await category.remove();
-    await Recipe.deleteRecipesFromCategory(id);
+    await Recipe.deleteItemsFromCategory(id);
+    await Article.deleteItemsFromCategory(id);
     const children = await CategoryModel.find({parentId: id});
     if(!children.length) return { success: true};
     for(let child of children) {
