@@ -15,7 +15,7 @@ exports.init = app => app.use(async (ctx, next) => {
       ctx.throw(400, messages);
     }
 
-    if (e.code ==='E11000' || e.name === 'ValidationError' || e.name === 'MongoError' || e.message ) {
+    if (e.code ==='E11000' || e.name === 'ValidationError' || e.name === 'MongoError') {
       ctx.throw(400, e.message);
     }
     ctx.throw(500, e.message);
