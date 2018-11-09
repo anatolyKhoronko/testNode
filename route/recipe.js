@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const Joi = require('joi');
 
 const Recipe = require('../actions/Recipe');
+const Category = require('../actions/Category');
 
 const validation = ({ create = false }) => async(ctx, next) => {
   const schema = Joi.object().keys({
@@ -28,6 +29,7 @@ router.get('/', async(ctx) => {
 });
 
 router.post('/', validation({ create: true }), async(ctx) => {
+  await Category.getCategoryById(ctx.validBody.categoryId); // check the presence of such a category
   ctx.body = await Recipe.createRecipe(ctx.validBody);
 });
 

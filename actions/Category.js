@@ -25,7 +25,7 @@ class Category {
     try {
       return await CategoryModel.create(pick(data, CategoryModel.publicFields));
     } catch (e) {
-      throw { customError: true, statusCode: 400, message: 'Bad request' };
+      throw e;
     }
   }
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { pick } = require('lodash');
 const RecipeModel = require('../db/models/recipe');
 
-class Category {
+class Recipe {
   async getAllRecipes() {
     return await RecipeModel.find();
   }
@@ -35,7 +35,7 @@ class Category {
     try {
       return await RecipeModel.create(pick(data, RecipeModel.publicFields));
     } catch (e) {
-      throw { customError: true, statusCode: 400, message: 'Bad request' };
+      throw e;
     }
   }
 
@@ -61,4 +61,4 @@ class Category {
   }
 }
 
-module.exports = new Category();
+module.exports = new Recipe();
